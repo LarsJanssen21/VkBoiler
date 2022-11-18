@@ -392,6 +392,7 @@ bool VulkanApp::QueryPhysicalDeviceQueues(VkPhysicalDevice device, const PreDevi
 						// Amount of queues left is more or exactly equal to the desired queues
 						else
 						{
+							count = desiredCounts[i];
 							queuesLeftInFamily -= desiredCounts[i];
 
 							desiredCounts[i] = 0;

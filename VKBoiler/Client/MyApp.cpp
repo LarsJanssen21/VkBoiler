@@ -16,26 +16,24 @@ void MyApp::PreDeviceSetup(PreDeviceSetupParameters& params)
 		type.Types = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT;
 		type.Count = 2;
 		params.DesiredQueues.push_back(type);
-
-		VkQueue queueHandles[2] = {};
-		uint32_t handleIndex = 0;
-		for (const auto& indices : m_QueueIndices)
-		{
-			for (size_t i = 0; i < indices.FamilyCount; i++)
-			{
-				for (uint32_t offset = 0; offset < indices.Count[i]; offset++)
-				{
-					vkGetDeviceQueue(m_Device, indices.Families[i], indices.FirstIndex[i] + offset, &queueHandles[handleIndex]);
-					handleIndex++;
-				}
-			}
-		}
 	}
 }
 
 void MyApp::Init()
 {
-
+	VkQueue queueHandles[2] = {};
+	uint32_t handleIndex = 0;
+	for (const auto& indices : m_QueueIndices)
+	{
+		for (size_t i = 0; i < indices.FamilyCount; i++)
+		{
+			for (uint32_t offset = 0; offset < indices.Count[i]; offset++)
+			{
+				vkGetDeviceQueue(m_Device, indices.Families[i], indices.FirstIndex[i] + offset, &queueHandles[handleIndex]);
+				handleIndex++;
+			}
+		}
+	}
 }
 
 void MyApp::Tick()

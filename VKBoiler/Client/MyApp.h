@@ -12,7 +12,4 @@ public:
 	virtual void Init() final override;
 	virtual void Tick() final override;
 	virtual void Destroy() final override;
-
-private:
-	VkQueue* m_Queues = nullptr;
 };
