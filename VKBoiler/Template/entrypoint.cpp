@@ -15,7 +15,8 @@ public:
 	void Init()
 	{
 		m_pApp->BaseInit();
-		m_pApp->Init();
+		if(!m_pApp->m_InitializedBase)
+			m_pApp->Init();
 	}
 	void Tick()
 	{
@@ -25,7 +26,9 @@ public:
 	}
 	void Destroy() 
 	{
-		m_pApp->Destroy();
+		if (!m_pApp->m_InitializedBase)
+			m_pApp->Destroy();
+
 		m_pApp->BaseDestroy();
 	}
 

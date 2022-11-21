@@ -70,7 +70,7 @@ private:
 	/// <summary>
 	/// Initializaes Vulkan and window
 	/// </summary>
-	void BaseInit();
+	bool BaseInit();
 	/// <summary>
 	/// Destroys vulkan context and window
 	/// </summary>
@@ -105,4 +105,7 @@ protected:
 	std::vector<QueueIndices> m_QueueIndices = {};
 	uint32_t m_TotalQueueCount = 0;
 	VkDevice m_Device = VK_NULL_HANDLE;
+
+private:
+	bool m_InitializedBase = false;
 };

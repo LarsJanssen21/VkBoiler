@@ -16,6 +16,8 @@ void MyApp::PreDeviceSetup(PreDeviceSetupParameters& params)
 		type.Types = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT;
 		type.Count = 2;
 		params.DesiredQueues.push_back(type);
+
+		params.DeviceExtensions.push_back("fail test");
 	}
 }
 

@@ -1,11 +1,11 @@
 #include "App.h"
 
-#define OUT_CODE(condition) if(!condition) { m_Running = false; return; }
+#define OUT_CODE(condition) if(!condition) { m_Running = false; return false; }
 
 #include <vulkan/vulkan_win32.h>
 #include <vector>
 
-void VulkanApp::BaseInit()
+bool VulkanApp::BaseInit()
 {
 	// Setting up parameters pre device creation
 	PreDeviceSetupParameters params = {};
@@ -17,20 +17,23 @@ void VulkanApp::BaseInit()
 	OUT_CODE(CreateSurface());
 	OUT_CODE(PickPhysicalDevice(params));
 	OUT_CODE(CreateLogicalDevice(params));
+
+	m_InitializedBase = true;
+	return true;
 }
 
 void VulkanApp::BaseDestroy()
 {
 	// Own destroy code
-	if(m_Device != VK_NULL_HANDLE)
+	if (m_Device != VK_NULL_HANDLE)
 		vkDestroyDevice(m_Device, nullptr);
 
-	if(m_Surface != VK_NULL_HANDLE)
+	if (m_Surface != VK_NULL_HANDLE)
 		vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
-	if(m_pWindow)
+	if (m_pWindow)
 		delete m_pWindow;
 
-	if(m_Instance != VK_NULL_HANDLE)
+	if (m_Instance != VK_NULL_HANDLE)
 		vkDestroyInstance(m_Instance, nullptr);
 }
 
